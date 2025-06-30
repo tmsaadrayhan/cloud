@@ -16,7 +16,7 @@ export default function GalleryPage() {
   const [imagesByDate, setImagesByDate] = useState({});
 
   useEffect(() => {
-    axios.get('http://localhost:3000/file')
+    axios.get('https://cloud-backup-1oyf.vercel.app/file')
       .then((res) => {
         const grouped = groupImagesByDate(res.data);
         setImagesByDate(grouped);

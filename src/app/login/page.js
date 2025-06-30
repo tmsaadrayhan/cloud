@@ -14,7 +14,7 @@ const LoginPage = () => {
       password: e.target.password.value,
     };
     axios
-      .post("http://localhost:3000/auth/login", formData, {
+      .post("https://cloud-backup-1oyf.vercel.app/auth/login", formData, {
         headers: {
           "Content-Type": "application/json",
         },

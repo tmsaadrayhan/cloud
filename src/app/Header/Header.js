@@ -9,7 +9,7 @@ const Header = () => {
     try {
       if (localStorage.getItem("user")) {
         const response = await axios.get(
-          `http://localhost:3000/users/${localStorage.getItem("user")}`,
+          `https://cloud-backup-1oyf.vercel.app/users/${localStorage.getItem("user")}`,
           {
             headers: {
               authorization: `Bearer ${localStorage.getItem("token")}`,

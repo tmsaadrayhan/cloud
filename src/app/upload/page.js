@@ -9,7 +9,7 @@ const upload = () => {
     try {
       if(localStorage.getItem("user")){
         const response = await axios.get(
-          `http://localhost:3000/users/${localStorage.getItem("user")}`,
+          `https://cloud-backup-1oyf.vercel.app/users/${localStorage.getItem("user")}`,
           {
             headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
           }
@@ -40,7 +40,7 @@ const upload = () => {
   const fetchFolderNames = async () => {
     // Simulate fetching folder names from server or local storage
     try {
-      const res = await axios.get("http://localhost:3000/folder");
+      const res = await axios.get("https://cloud-backup-1oyf.vercel.app/folder");
 
       setFolderOptions(res.data);
     } catch (error) {
@@ -79,7 +79,7 @@ const upload = () => {
 
     try {
       const responseCloudinary = await axios.post(
-        "http://localhost:3000/api/upload",
+        "https://cloud-backup-1oyf.vercel.app/api/upload",
         formData,
         {
           headers: {
@@ -93,7 +93,7 @@ const upload = () => {
         public: radioValue,
       });
       const response = await axios.post(
-        "http://localhost:3000/file",
+        "https://cloud-backup-1oyf.vercel.app/file",
         {
           files: responseCloudinary.data,
           folder: selectedFolder,
