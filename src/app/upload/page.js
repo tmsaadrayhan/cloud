@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const upload = () => {
+const Upload = () => {
   const router = useRouter();
   const auth = async () => {
     try {
@@ -172,4 +172,4 @@ const upload = () => {
   );
 };
 
-export default upload;
+export default Upload;

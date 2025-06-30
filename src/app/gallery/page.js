@@ -1,11 +1,10 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function groupImagesByDate(images) {
   return images.reduce((acc, img) => {
-    const dateKey = new Date(img.date).toISOString().split('T')[0]; // YYYY-MM-DD
+    const dateKey = new Date(img.date).toISOString().split('T')[0];
     if (!acc[dateKey]) acc[dateKey] = [];
     acc[dateKey].push(img);
     return acc;
@@ -14,17 +13,23 @@ function groupImagesByDate(images) {
 
 export default function GalleryPage() {
   const [imagesByDate, setImagesByDate] = useState({});
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const fetchImages = async (pageNum) => {
+    try {
+      const res = await axios.get(`https://cloud-backup-1oyf.vercel.app/file?page=${pageNum}&limit=12`);
+      const grouped = groupImagesByDate(res.data.data);
+      setImagesByDate(grouped);
+      setTotalPages(res.data.pages);
+    } catch (err) {
+      console.error('Error fetching images:', err);
+    }
+  };
 
   useEffect(() => {
-    axios.get('https://cloud-backup-1oyf.vercel.app/file')
-      .then((res) => {
-        const grouped = groupImagesByDate(res.data);
-        setImagesByDate(grouped);
-      })
-      .catch((err) => {
-        console.error('Error fetching images:', err);
-      });
-  }, []);
+    fetchImages(page);
+  }, [page]);
 
   return (
     <main className="p-6">
@@ -45,6 +50,12 @@ export default function GalleryPage() {
           </div>
         </div>
       ))}
+
+      <div className="flex justify-center space-x-4 mt-10">
+        <button onClick={() => setPage(p => Math.max(p - 1, 1))} disabled={page === 1} className="btn">Previous</button>
+        <span>Page {page} of {totalPages}</span>
+        <button onClick={() => setPage(p => Math.min(p + 1, totalPages))} disabled={page === totalPages} className="btn">Next</button>
+      </div>
     </main>
   );
 }

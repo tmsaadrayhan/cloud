@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const page = () => {
+const CreateFolderPage = () => {
   const [folderOptions, setFolderOptions] = useState([]);
   const [isPublic, setIsPublic] = useState(false);
   const [uploadStatus, setUploadStatus] = useState("");
@@ -118,11 +118,11 @@ const page = () => {
       {uploadStatus && <p>{uploadStatus}</p>}
       <div>
         {folderOptions.map((folder) => (
-          <div id={folder._id}>{folder.name}</div>
+          <div key={folder._id}>{folder.name}</div>
         ))}
       </div>
     </div>
   );
 };
 
-export default page;
+export default CreateFolderPage;

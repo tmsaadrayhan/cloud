@@ -1,5 +1,5 @@
-const page = () => {
+const HomePage = () => {
   return <div>Saad Cloud</div>;
 };
 
-export default page;
+export default HomePage;

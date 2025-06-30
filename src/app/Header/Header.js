@@ -9,7 +9,9 @@ const Header = () => {
     try {
       if (localStorage.getItem("user")) {
         const response = await axios.get(
-          `https://cloud-backup-1oyf.vercel.app/users/${localStorage.getItem("user")}`,
+          `https://cloud-backup-1oyf.vercel.app/users/${localStorage.getItem(
+            "user"
+          )}`,
           {
             headers: {
               authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -31,10 +33,15 @@ const Header = () => {
     }
   };
   return (
-    <div>
+    <div className="my-1">
       <Link href="/">Home</Link>
-      <button onClick={() => privateRoute("/upload")}>upload files</button>
-      <button onClick={() => privateRoute("/create-folder")}>
+      <button className="mx-2" onClick={() => privateRoute("/upload")}>
+        Upload Files
+      </button>
+      <button className="mx-2" onClick={() => privateRoute("/gallery")}>
+        Gallery
+      </button>
+      <button className="mx-2" onClick={() => privateRoute("/create-folder")}>
         Create Folder
       </button>
       <Link href="/login">Login</Link>
